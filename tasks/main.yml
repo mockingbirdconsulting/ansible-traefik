@@ -1,0 +1,14 @@
+---
+# tasks file for traefik
+- name: Download and install the Traefik binary
+  unarchive:
+    src: https://github.com/containous/traefik/releases/download/v2.1.1/traefik_v{{ traefik_version }}_linux_amd64.tar.gz
+    dest: /usr/local/bin/
+
+- name: Tidy up the unpacked archive
+  file:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+      - "/usr/local/bin/LICENSE"
+      - "/usr/local/bin/CHANGELOG.md"
